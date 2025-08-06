@@ -1,0 +1,10 @@
+# Entorno virtual
+venv/
+*.pyc
+
+# Archivos de base de datos
+*.sqlite3
+db.sqlite3
+
+# Archivos de entorno y secretos
+.env
