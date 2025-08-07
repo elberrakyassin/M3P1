@@ -1,0 +1,29 @@
+name: Django CI
+
+on:
+  push:
+    branches: [ "main" ] # <-- ¡ASEGÚRATE DE QUE ESTE NOMBRE DE RAMA SEA EL CORRECTO!
+  pull_request:
+    branches: [ "main" ] # <-- ¡ASEGÚRATE DE QUE ESTE NOMBRE DE RAMA SEA EL CORRECTO!
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10"] # Simplificado para la prueba
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install django # Instalamos Django directamente para la prueba
+    - name: Run Tests
+      run: |
+        # Este paso fallará si no tienes un proyecto, pero es para ver si el workflow se activa
+        echo "Tests would run here"
